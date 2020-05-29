@@ -1,3 +1,5 @@
+import { log } from "../deps.ts";
+
 async function timer(ctx: any, next: any) {
   const start = Date.now();
 
@@ -6,7 +8,7 @@ async function timer(ctx: any, next: any) {
   const ms = Date.now() - start;
 
   // ctx.response.headers.set("X-Response-Time", `${ms}ms`);
-  console.log(`${ctx.request.method} ${ctx.request.url} - ${ms}ms`);
+  log.info(`${ctx.request.method} ${ctx.request.url} - ${ms}ms`);
 }
 
 export {
