@@ -9,8 +9,9 @@ ready to use with zero configuration.
 
 * Built on [Deno](https://deno.land) and Oak.
 * Separated middleware and actions.
+* Simple TDD convention
 * [TODO] Ready to containerize
-* [TODO] TDD convention
+
 
 ## Quick start
 
@@ -22,6 +23,7 @@ Clone this git repo `git clone
    use.
 
 Execute `./run` for starting application backend.
+Or `./test` to execute unit tests.
 
 
 ## Todo List
