@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 deno run \
     --allow-net \
     --allow-env \

@@ -10,7 +10,8 @@ ready to use with zero configuration.
 * Built on [Deno](https://deno.land) and Oak.
 * Separated middleware and actions.
 * Simple TDD convention
-* [TODO] Ready to containerize
+* Ready to containerize
+* [TODO] Development mode
 
 
 ## Quick start
@@ -22,8 +23,14 @@ Clone this git repo `git clone
    release](https://github.com/eserozvataf/hex-service/releases) you'd like to
    use.
 
-Execute `./run` for starting application backend.
-Or `./test` to execute unit tests.
+
+## Commands
+
+| Command          | Description                                 |
+|------------------|---------------------------------------------|
+| `./test`         | Execute unit tests                          |
+| `./run`          | Start application backend                   |
+| `./dockerize`    | Start application in a docker container     |
 
 
 ## Todo List
