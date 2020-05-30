@@ -45,12 +45,12 @@ See [GitHub Projects](https://github.com/eserozvataf/hex-service/projects) for m
 
 ## License
 
-Apache 2.0, for further details, please see [LICENSE](LICENSE) file
+Apache 2.0, for further details, please see [LICENSE](LICENSE) file.
 
 
 ## Contributing
 
-See [contributors.md](contributors.md)
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 It is publicly open for any contribution. Bugfixes, new features and extra modules are welcome.
 
