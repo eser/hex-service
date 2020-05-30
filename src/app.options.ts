@@ -22,7 +22,7 @@ const envfile: dotenv.DotenvConfig = dotenv.config({ safe: false });
 const portRaw = getValue<string>(envfile, "PORT", "8000");
 const port: number = parseInt(portRaw, 10);
 
-// options: logs
+// option: logs
 const logs = getValue<logLevels.LevelName>(envfile, "LOGS", "INFO");
 
 // unify options
