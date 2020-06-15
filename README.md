@@ -29,9 +29,11 @@ Clone this git repo `git clone
 | Command              | Description                                          |
 |----------------------|------------------------------------------------------|
 | `./hex help`         | Shows available commands                             |
-| `./hex test`         | Execute unit tests                                   |
 | `./hex run`          | Start application backend                            |
 | `./hex run.debug`    | Debug application with chromium inspector or VS Code |
+| `./hex test`         | Execute unit tests                                   |
+| `./hex lint`         | Executes linter                                      |
+| `./hex fmt`          | Executes formatter                                   |
 | `./hex dockerize`    | Start application in a docker container              |
 
 

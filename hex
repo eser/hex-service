@@ -27,9 +27,9 @@ case $1 in
     docker run -it --init -p 8000:8000 hex-service
     ;;
 
-  "help")
-    echo "hex-service cli interface"
-    echo "-------------------------"
+  "help" | "")
+    echo "hex-service CLI help"
+    echo "--------------------"
     echo "available commands are:"
     echo "- help       : Shows available commands"
     echo "- run        : Start application backend"

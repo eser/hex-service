@@ -7,7 +7,8 @@
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "port": 9229,
-            "runtimeExecutable": "${workspaceFolder}/run.debug"
+            "runtimeExecutable": "${workspaceFolder}/hex",
+            "runtimeArgs": [ "run.debug" ]
         }
     ]
 }
