@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Deno Launch",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "port": 9229,
+            "runtimeExecutable": "${workspaceFolder}/run.debug"
+        }
+    ]
+}

@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-docker build -t hex-service .
-docker run -it --init -p 8000:8000 hex-service

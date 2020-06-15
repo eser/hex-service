@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+case $1 in
+
+  "run")
+    deno run --allow-net --allow-env --allow-read ./src/app.ts
+    ;;
+
+  "run.debug")
+    deno run --allow-net --allow-env --allow-read --inspect-brk ./src/app.ts
+    ;;
+
+  "test")
+    deno test
+    ;;
+
+  "lint")
+    deno lint --unstable
+    ;;
+
+  "fmt")
+    deno fmt
+    ;;
+
+  "dockerize")
+    docker build -t hex-service .
+    docker run -it --init -p 8000:8000 hex-service
+    ;;
+
+  "help")
+    echo "hex-service cli interface"
+    echo "-------------------------"
+    echo "available commands are:"
+    echo "- help       : Shows available commands"
+    echo "- run        : Start application backend"
+    echo "- run.debug  : Debug application with chromium inspector or VS Code"
+    echo "- test       : Execute unit tests"
+    echo "- lint       : Executes linter"
+    echo "- fmt        : Executes formatter"
+    echo "- dockerize  : Start application in a docker container"
+    ;;
+
+  *)
+    echo "unknown command - $*"
+    ;;
+
+esac

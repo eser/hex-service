@@ -26,11 +26,13 @@ Clone this git repo `git clone
 
 ## Commands
 
-| Command          | Description                                 |
-|------------------|---------------------------------------------|
-| `./test`         | Execute unit tests                          |
-| `./run`          | Start application backend                   |
-| `./dockerize`    | Start application in a docker container     |
+| Command              | Description                                          |
+|----------------------|------------------------------------------------------|
+| `./hex help`         | Shows available commands                             |
+| `./hex test`         | Execute unit tests                                   |
+| `./hex run`          | Start application backend                            |
+| `./hex run.debug`    | Debug application with chromium inspector or VS Code |
+| `./hex dockerize`    | Start application in a docker container              |
 
 
 ## Todo List
