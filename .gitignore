@@ -1,2 +1,9 @@
-# dotenv environment variables file
-.env
+# dotenv local environment variables file
+.env.local
+.env.*.local
+
+# OS-specific files
+.DS_Store
+
+# Editor-specific files
+# .vscode/

@@ -23,8 +23,9 @@ Clone this git repo `git clone
    release](https://github.com/eserozvataf/hex-service/releases) you'd like to
    use.
 
-**Important**: `.env` file is git-ignored, so you have to run `cp .env.sample .env`
-before running the service.
+**Important**: local env files (i.e., `.env.local`) is git-ignored, so you can
+have secret your sensitive environment variables by creating local copies of
+environment variables before running the service.
 
 
 ## Commands
