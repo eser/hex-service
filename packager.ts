@@ -11,12 +11,13 @@ await build({
   ],
   outDir: "./dist",
   package: packageJson,
+  importMap: denoJson.importMap,
   shims: {
     custom: [
       // web streams
       {
         package: {
-          name: "web-streams-polyfill",
+          name: "web-streams-polyfill", // stream/web
           subPath: "ponyfill/es2018",
           version: "3.2.1",
         },
@@ -32,18 +33,15 @@ await build({
         ],
       },
       // error event
-      // {
-      //   package: {
-      //     name: "@lycoris-nubila/event-constructor-polyfill",
-      //     version: "1.0.4",
-      //   },
-      //   globalNames: [
-      //     {
-      //       name: "ErrorEvent",
-      //       exportName: "ErrorEvent",
-      //     },
-      //   ],
-      // },
+      {
+        module: "./src/core/shims/error-event.ts",
+        globalNames: [
+          {
+            name: "ErrorEvent",
+            exportName: "ErrorEvent",
+          },
+        ],
+      },
     ],
     // see JS docs for overview and more options
     deno: true,
@@ -64,17 +62,21 @@ await build({
     // shims WebSocket
     webSocket: true,
   },
-  mappings: {},
+  mappings: {
+    "https://deno.land/x/oak@v11.1.0/http_server_native.ts": "https://deno.land/x/oak@v11.1.0/http_server_node.ts",
+  },
   typeCheck: false,
   test: false,
   declaration: true,
   compilerOptions: {
     // importHelpers: tsconfigJson?.compilerOptions?.importHelpers,
+    importHelpers: true,
     // target: tsconfigJson?.compilerOptions?.target,
+    target: "ES2021",
     // sourceMap: tscconfigJson?.compilerOptions?.sourceMap,
     // inlineSources: tscconfigJson?.compilerOptions?.inlineSources,
     // lib: denoJson?.compilerOptions?.lib as LibName[] | undefined,
-    lib: ["es2022", "dom"], // , "dom.iterable", "dom.asynciterable"
+    lib: ["esnext", "dom", "dom.iterable"], // , "dom.asynciterable"
     // skipLibCheck: tsconfigJson?.compilerOptions?.skipLibCheck,
   },
   scriptModule: "cjs",

@@ -64,6 +64,11 @@ See [GitHub Projects](https://github.com/eserozvataf/hex-service/projects) for m
 Apache 2.0, for further details, please see [LICENSE](LICENSE) file.
 
 
+## Credits
+
+Thanks [Oak](https://github.com/oakserver/oak) team for awesome project. Also their `ErrorEvent` shim (MIT-licensed) is used in this project.
+
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for details.

@@ -21,6 +21,10 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
+    "@types/node": "^18.7.18",
     "@types/ws": "^8.5.3"
+  },
+  "dependencies": {
+    "tslib": "^2.4.0"
   }
 }
