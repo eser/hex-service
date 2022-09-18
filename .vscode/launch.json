@@ -6,9 +6,9 @@
             "type": "node",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "port": 9229,
-            "runtimeExecutable": "${workspaceFolder}/hex",
-            "runtimeArgs": [ "run.debug" ]
+            "runtimeExecutable": "deno",
+            "runtimeArgs": [ "./src/app.ts" ],
+            "outputCapture": "std",
         }
     ]
 }

@@ -1,0 +1,26 @@
+{
+  "name": "hex-service",
+  "description": "Deno boilerplate for plain backend microservices",
+  "keywords": [],
+  "version": "0.5.0",
+  "homepage": "https://github.com/eserozvataf/hex#readme",
+  "author": "Eser Ozvataf <eser@ozvataf.com>",
+  "contributors": [
+    {
+      "name": "Eser Ozvataf",
+      "email": "eser@ozvataf.com",
+      "url": "http://eser.ozvataf.com/"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eserozvataf/hex.git"
+  },
+  "bugs": {
+    "url": "https://github.com/eserozvataf/hex/issues"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/ws": "^8.5.3"
+  }
+}

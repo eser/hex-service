@@ -1,7 +1,5 @@
-function home(): string {
+const homeAction = (): string => {
   return "Hello world!";
-}
-
-export {
-  home as default,
 };
+
+export { homeAction, homeAction as default };

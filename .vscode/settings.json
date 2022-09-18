@@ -1,0 +1,30 @@
+{
+  "deno.enable": true,
+  "deno.importMap": "./import_map.json",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    ".github/ISSUE_TEMPLATE": true,
+    ".github/FUNDING.yml": true,
+    "node_modules": true,
+    "yarn.lock": true,
+    "package-lock.json": true,
+    "package.json": true,
+    ".editorconfig": true,
+    "CODE_OF_CONDUCT.md": true,
+    "CONTRIBUTING.md": true,
+    "LICENSE": true,
+    "packager.ts": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/.hg/store/**": true,
+    "dist/**": true
+  }
+}

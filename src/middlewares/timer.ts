@@ -1,6 +1,7 @@
-import { log } from "../deps.ts";
+import { log } from "@app/core/mod.ts";
 
-async function timer(ctx: any, next: any) {
+// deno-lint-ignore no-explicit-any
+const timerMiddleware = async (ctx: any, next: any) => {
   const start = Date.now();
 
   await next();
@@ -9,8 +10,6 @@ async function timer(ctx: any, next: any) {
 
   // ctx.response.headers.set("X-Response-Time", `${ms}ms`);
   log.info(`${ctx.request.method} ${ctx.request.url} - ${ms}ms`);
-}
-
-export {
-  timer as default,
 };
+
+export { timerMiddleware, timerMiddleware as default };

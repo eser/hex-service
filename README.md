@@ -1,17 +1,22 @@
 # ✖️ [hex-service](https://github.com/eserozvataf/hex-service)
 
-Hex Service is a service boilerplate to enable developers to start coding their backend API
-codebase immediately. By emerging Deno's simplicity typescript and ecmascript modules are
-ready to use with zero configuration.
+Hex Service is a service boilerplate to enable developers to start coding their backend API codebase immediately.
+
+However it sounds very familiar and there are tons of boilerplates already serves this purpose, hex-service allows you to run your code for both Deno and Node.js.
+
+Since it is an orthogonal solution for developers who wants to be able to stick with modern tooling by using them from today. It simply runs on Deno's powerful ecosystem which providers many developer tools and libraries built-in, but at the same time allows you to compile your code in order to run it on good old `Node.js`.
 
 
 ## Features
 
 * Built on [Deno](https://deno.land) and Oak.
+* Built-in [TypeScript](https://www.typescriptlang.org/) support.
 * Separated middleware and actions.
-* Simple TDD convention
-* Ready to containerize
+* Simple TDD convention and testing environment.
+* Ready to containerize.
+* Ready to debug on VS Code or Chromium Inspector.
 * [TODO] Development mode
+* [TODO] Built-in [Swagger](https://swagger.io) support.
 
 
 ## Quick start
@@ -30,15 +35,18 @@ environment variables before running the service.
 
 ## Commands
 
-| Command              | Description                                          |
-|----------------------|------------------------------------------------------|
-| `./hex help`         | Shows available commands                             |
-| `./hex run`          | Start application backend                            |
-| `./hex run.debug`    | Debug application with chromium inspector or VS Code |
-| `./hex test`         | Execute unit tests                                   |
-| `./hex lint`         | Executes linter                                      |
-| `./hex fmt`          | Executes formatter                                   |
-| `./hex dockerize`    | Start application in a docker container              |
+| Command                    | Description                                          |
+|----------------------------|------------------------------------------------------|
+| `deno task build`          | Compiles codebase to allow its execution on Node.js  |
+| `deno task start`          | Start application backend                            |
+| `deno task dev`            | Debug application with chromium inspector or VS Code |
+| `deno task test`           | Execute unit tests                                   |
+| `deno task test:coverage`  | Execute unit tests with coverage report              |
+| `deno task bench`          | Executes benchmark testing                           |
+| `deno task cleanup`        | Cleans up generated build files                      |
+| `deno task dockerize`      | Start application in a docker container              |
+| `deno lint`                | Executes linter                                      |
+| `deno fmt`                 | Executes formatter                                   |
 
 
 ## Todo List
@@ -68,4 +76,4 @@ It is publicly open for any contribution. Bugfixes, new features and extra modul
 
 ## To Support
 
-[Visit my patreon profile at patreon.com/eserozvataf](https://www.patreon.com/eserozvataf)
+[Visit my GitHub Sponsors profile at github.com/sponsors/eserozvataf](https://github.com/sponsors/eserozvataf)

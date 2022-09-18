@@ -1,9 +1,19 @@
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor-specific files
+# .vscode/
+
 # dotenv local environment variables file
 .env.local
 .env.*.local
 
-# OS-specific files
-.DS_Store
+# NPM packaging
+node_modules/
+yarn.lock
+package-lock.json
 
-# Editor-specific files
-# .vscode/
+# Build output
+dist/
+tsconfig.tsbuildinfo

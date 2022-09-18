@@ -1,11 +1,11 @@
-import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
-import homeAction from "./home.ts";
+import { asserts } from "@app/core/mod.ts";
+import { homeAction } from "@app/actions/home.ts";
 
 Deno.test({
   name: "actions:home",
   fn(): void {
     const expected = "Hello world!";
 
-    assertEquals(expected, homeAction());
-  }
+    asserts.assertEquals(expected, homeAction());
+  },
 });
