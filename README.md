@@ -1,27 +1,28 @@
 # ✖️ [hex-service](https://github.com/eserozvataf/hex-service)
 
-Hex Service is a service boilerplate to enable developers to start coding their backend API codebase immediately.
+Hex Service is a service boilerplate to enable developers to start coding their **forward-compatible** backend projects immediately.
 
-However it sounds very familiar and there are tons of boilerplates already serves this purpose, hex-service allows you to run your code for both Deno and Node.js.
+However, the motivation behind the project may sound familiar, and there are tons of boilerplates already that serve this purpose, hex-service allows you to run your code for **both** `Deno` and `Node.js`.
 
-Since it is an orthogonal solution for developers who wants to be able to stick with modern tooling by using them from today. It simply runs on Deno's powerful ecosystem which providers many developer tools and libraries built-in, but at the same time allows you to compile your code in order to run it on good old `Node.js`.
+Since it provides an orthogonal solution for `Deno` and `Node.js` code sharing, it's a perfect boilerplate for developers who want to be able to stick with modern tooling by using them immediately. hex-service simply runs on Deno's powerful ecosystem, which providers many developer tools and libraries built-in. Additionally, it allows you to compile your code in order to run on good old `Node.js`.
 
 
 ## Features
 
-* Built on [Deno](https://deno.land) and Oak.
-* Built-in [TypeScript](https://www.typescriptlang.org/) support.
+* Built on [Deno](https://deno.land) and Oak. So it supports Modern Web APIs.
+* Transpiles [TypeScript](https://www.typescriptlang.org/) and [React JSX](https://reactjs.org/) out of the box.
 * Separated middleware and actions.
 * Simple TDD convention and testing environment.
-* Ready to containerize.
 * Ready to debug on VS Code or Chromium Inspector.
+* Ready to containerize.
 * [TODO] Development mode
 * [TODO] Built-in [Swagger](https://swagger.io) support.
+* [TODO] MongoDB connection support.
 
 
 ## Quick start
 
-Ensure that `Deno` is installed on your system first.
+Ensure that `Deno` or `Node.js` is installed on your system first.
 
 Clone this git repo `git clone
    https://github.com/eserozvataf/hex-service.git` - and checkout the [tagged
@@ -48,6 +49,20 @@ environment variables before running the service.
 | `deno lint`                | Executes linter                                      |
 | `deno fmt`                 | Executes formatter                                   |
 
+
+## Running the service
+
+With `Deno`:
+
+```bash
+deno task start
+```
+
+With `Node.js`:
+
+```bash
+node dist/script/app.js
+```
 
 ## Todo List
 
