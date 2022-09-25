@@ -12,4 +12,4 @@ const timerMiddleware = async (ctx: any, next: any) => {
   log.info(`${ctx.request.method} ${ctx.request.url} - ${ms}ms`);
 };
 
-export { timerMiddleware, timerMiddleware as default };
+export { timerMiddleware };

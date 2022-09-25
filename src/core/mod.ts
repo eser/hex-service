@@ -6,6 +6,9 @@ type Application = oak.Application;
 type Middleware = oak.Middleware;
 type Router = oak.Router;
 type State = oak.State;
+type Context = oak.Context & {
+  params: Record<string, string>;
+};
 type RouteParams<Route extends string> = oak.RouteParams<Route>;
 type Route<
   R extends string,
@@ -26,6 +29,16 @@ type RouterContext<
   S extends State = Record<string, any>,
 > = oak.RouterContext<R, P, S>;
 
+type HttpMethods =
+  | "all"
+  | "get"
+  | "post"
+  | "patch"
+  | "put"
+  | "delete"
+  | "head"
+  | "options";
+
 interface Service {
   internalApp: Application;
   router: Router;
@@ -33,6 +46,22 @@ interface Service {
 
   addMiddleware: (middleware: Middleware) => void;
   addHealthCheck: (path: string) => void;
+  addRoute: <
+    R extends string,
+    P extends RouteParams<R> = RouteParams<R>,
+    // deno-lint-ignore no-explicit-any
+    S extends State = Record<string, any>,
+  >(
+    method: HttpMethods,
+    path: R,
+    ...middlewares: [
+      ...RouterMiddleware<R, P, S>[],
+      (ctx: RouterContext<R, P, S> | Context) => string,
+    ] | [
+      // FIXME sorry, it's mandatory hack for typescript
+      (ctx: Context) => string,
+    ]
+  ) => void;
 
   start: () => Promise<void>;
 }
@@ -65,10 +94,6 @@ const init = async (customOptions?: Options): Promise<Service> => {
   // define routes
   const router = new oak.Router();
 
-  // add middlewares
-  app.use(router.routes());
-  app.use(router.allowedMethods());
-
   // init logger
   await log.setup({
     handlers: {
@@ -98,6 +123,39 @@ const init = async (customOptions?: Options): Promise<Service> => {
       });
     },
 
+    addRoute: <
+      R extends string,
+      P extends RouteParams<R> = RouteParams<R>,
+      // deno-lint-ignore no-explicit-any
+      S extends State = Record<string, any>,
+    >(
+      method: HttpMethods,
+      path: R,
+      ...middlewares: [
+        ...RouterMiddleware<R, P, S>[],
+        (ctx: RouterContext<R, P, S> | Context) => string,
+      ] | [
+        // FIXME sorry, it's mandatory hack for typescript
+        (ctx: Context) => string,
+      ]
+    ): void => {
+      const fn = middlewares.slice(-1)[0] as
+        | ((ctx: RouterContext<R, P, S>) => string)
+        | undefined;
+
+      const middlewares_ = middlewares.slice(0, -1) as RouterMiddleware<
+        R,
+        P,
+        S
+      >[];
+      middlewares_.push((ctx: RouterContext<R, P, S>) => {
+        ctx.response.body = fn?.(ctx);
+      });
+
+      // @ts-ignore you know nothing typescript
+      router[method](path, ...middlewares_);
+    },
+
     start: () => start(serviceObject),
   };
 
@@ -110,6 +168,10 @@ const run = async (initializer: (s: Service) => void | Promise<void>) => {
 
     await initializer(service);
 
+    // insert these as last 2 middlewares
+    service.internalApp.use(service.router.routes());
+    service.internalApp.use(service.router.allowedMethods());
+
     await service.start();
   } catch (error) {
     log.error(error);
@@ -119,6 +181,7 @@ const run = async (initializer: (s: Service) => void | Promise<void>) => {
 export {
   type Application,
   asserts,
+  type Context,
   init,
   log,
   type Middleware,

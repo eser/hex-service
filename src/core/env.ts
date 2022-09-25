@@ -30,4 +30,4 @@ const loadEnv = async (): Promise<dotenv.DotenvConfig> => {
   return vars;
 };
 
-export { loadEnv, loadEnv as default };
+export { loadEnv };
