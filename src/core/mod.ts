@@ -56,10 +56,10 @@ interface Service {
     path: R,
     ...middlewares: [
       ...RouterMiddleware<R, P, S>[],
-      (ctx: RouterContext<R, P, S> | Context) => string,
+      (ctx: RouterContext<R, P, S> | Context) => unknown,
     ] | [
       // FIXME sorry, it's mandatory hack for typescript
-      (ctx: Context) => string,
+      (ctx: Context) => unknown,
     ]
   ) => void;
 
@@ -133,14 +133,14 @@ const init = async (customOptions?: Options): Promise<Service> => {
       path: R,
       ...middlewares: [
         ...RouterMiddleware<R, P, S>[],
-        (ctx: RouterContext<R, P, S> | Context) => string,
+        (ctx: RouterContext<R, P, S> | Context) => unknown,
       ] | [
         // FIXME sorry, it's mandatory hack for typescript
-        (ctx: Context) => string,
+        (ctx: Context) => unknown,
       ]
     ): void => {
       const fn = middlewares.slice(-1)[0] as
-        | ((ctx: RouterContext<R, P, S>) => string)
+        | ((ctx: RouterContext<R, P, S>) => unknown)
         | undefined;
 
       const middlewares_ = middlewares.slice(0, -1) as RouterMiddleware<
@@ -149,7 +149,13 @@ const init = async (customOptions?: Options): Promise<Service> => {
         S
       >[];
       middlewares_.push((ctx: RouterContext<R, P, S>) => {
-        ctx.response.body = fn?.(ctx);
+        const result = fn?.(ctx);
+
+        if (result === undefined || result === null) {
+          ctx.response.body = "";
+        } else {
+          ctx.response.body = JSON.stringify(result);
+        }
       });
 
       // @ts-ignore you know nothing typescript

@@ -1,4 +1,4 @@
-const homeAction = (): string => {
+const homeAction = () => {
   return "Hello world!";
 };
 
