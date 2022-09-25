@@ -3,6 +3,7 @@ import { loadEnv } from "./env.ts";
 
 // interface definitions
 interface Options {
+  envName: string;
   port: number;
   logs: logLevels.LevelName;
 }
@@ -18,17 +19,21 @@ const getValue = <T extends unknown>(
 
 const loadOptions = async (): Promise<Options> => {
   // load environment variables
-  const envfile: dotenv.DotenvConfig = await loadEnv();
+  const env = await loadEnv();
+
+  // options: environment name
+  const envName = env.name;
 
   // option: port
-  const portRaw = getValue<string>(envfile, "PORT", "3000");
+  const portRaw = getValue<string>(env.vars, "PORT", "3000");
   const port: number = parseInt(portRaw, 10);
 
   // option: logs
-  const logs = getValue<logLevels.LevelName>(envfile, "LOGS", "INFO");
+  const logs = getValue<logLevels.LevelName>(env.vars, "LOGS", "INFO");
 
   // unify options
   const unified: Options = {
+    envName,
     port,
     logs,
   };

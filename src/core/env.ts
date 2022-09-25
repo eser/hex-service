@@ -15,19 +15,24 @@ const loadEnvFile = async (filepath: string): Promise<dotenv.DotenvConfig> => {
   }
 };
 
-const loadEnv = async (): Promise<dotenv.DotenvConfig> => {
+const loadEnv = async (): Promise<
+  { name: string; vars: dotenv.DotenvConfig }
+> => {
   const sysVars = Deno.env.toObject();
-  const env = sysVars["ENV"] ?? "development";
+  const envName = sysVars["ENV"] ?? "development";
 
   const vars = await loadEnvFile(".env");
-  Object.assign(vars, await loadEnvFile(`.env.${env}`));
-  if (env !== "test") {
+  Object.assign(vars, await loadEnvFile(`.env.${envName}`));
+  if (envName !== "test") {
     Object.assign(vars, await loadEnvFile(".env.local"));
   }
-  Object.assign(vars, await loadEnvFile(`.env.${env}.local`));
+  Object.assign(vars, await loadEnvFile(`.env.${envName}.local`));
   Object.assign(vars, sysVars);
 
-  return vars;
+  return {
+    name: envName,
+    vars,
+  };
 };
 
 export { loadEnv };

@@ -168,9 +168,40 @@ const init = async (customOptions?: Options): Promise<Service> => {
   return serviceObject;
 };
 
+const fixErrorObjectResult = (err: Error) => {
+  const serialized = JSON.stringify(err, Object.getOwnPropertyNames(err));
+
+  return JSON.parse(serialized);
+};
+
 const run = async (initializer: (s: Service) => void | Promise<void>) => {
   try {
     const service = await init();
+
+    // deno-lint-ignore no-explicit-any
+    service.internalApp.use(async (ctx: any, next: any) => {
+      try {
+        await next();
+      } catch (err) {
+        log.error(err);
+
+        if (oak.isHttpError(err)) {
+          ctx.response.status = err.status;
+        } else {
+          ctx.response.status = 500;
+        }
+
+        if (service.options.envName === "production") {
+          ctx.response.body = { error: err.message };
+        } else {
+          ctx.response.body = {
+            error: err.message,
+            details: fixErrorObjectResult(err),
+          };
+        }
+        ctx.response.type = "json";
+      }
+    });
 
     await initializer(service);
 

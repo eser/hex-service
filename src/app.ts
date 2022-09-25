@@ -2,6 +2,7 @@ import { type Context, run } from "@app/core/mod.ts";
 import { timerMiddleware } from "@app/middlewares/timer.ts";
 import { homeAction } from "@app/actions/home.ts";
 import { echoAction } from "@app/actions/echo.ts";
+import { errorProneAction } from "@app/actions/error-prone.ts";
 
 const app = run((s) => {
   // add middlewares
@@ -11,6 +12,8 @@ const app = run((s) => {
   s.addHealthCheck("/health-check");
 
   s.addRoute("get", "/", homeAction);
+
+  s.addRoute("get", "/error", errorProneAction);
 
   s.addRoute("get", "/:slug", (ctx: Context) => {
     ctx.assert(ctx?.params?.slug?.length > 2, 400, "Slug is required");
