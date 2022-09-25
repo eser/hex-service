@@ -1,4 +1,5 @@
 import { dotenv, logLevels } from "./deps.ts";
+import { loadEnv } from "./env.ts";
 
 // interface definitions
 interface Options {
@@ -15,9 +16,9 @@ const getValue = <T extends unknown>(
   return (Deno.env.get(key) ?? envfile[key] ?? defaultValue) as T;
 };
 
-const initOptions = (): Options => {
+const loadOptions = async (): Promise<Options> => {
   // load environment variables
-  const envfile: dotenv.DotenvConfig = dotenv.config({ safe: false });
+  const envfile: dotenv.DotenvConfig = await loadEnv();
 
   // option: port
   const portRaw = getValue<string>(envfile, "PORT", "3000");
@@ -35,6 +36,4 @@ const initOptions = (): Options => {
   return unified;
 };
 
-const options = initOptions();
-
-export { type Options, options, options as default };
+export { loadOptions, type Options };

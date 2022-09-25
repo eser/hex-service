@@ -1,5 +1,5 @@
 import { asserts, log, oak } from "./deps.ts";
-import { type Options, options } from "./options.ts";
+import { loadOptions, type Options } from "./options.ts";
 
 // interface definitions
 type Application = oak.Application;
@@ -32,6 +32,7 @@ interface Service {
   options: Options;
 
   addMiddleware: (middleware: Middleware) => void;
+  addHealthCheck: (path: string) => void;
 
   start: () => Promise<void>;
 }
@@ -39,18 +40,27 @@ interface Service {
 // public functions
 const start = async (service: Service): Promise<void> => {
   // boot application server
-  log.info(`Application is starting on port ${service.options.port}`);
-  log.debug(JSON.stringify(service.options, null, 2));
-
   await service.internalApp.listen({ port: service.options.port });
 };
 
 const init = async (customOptions?: Options): Promise<Service> => {
   // determine options
-  const options_ = customOptions ?? options;
+  const options_ = customOptions ?? await loadOptions();
 
   // initialize oak application
   const app = new oak.Application();
+
+  app.addEventListener(
+    "listen",
+    (e) => {
+      const protocol = (e.secure) ? "https://" : "http://";
+      const hostname = (e.hostname === "0.0.0.0") ? "localhost" : e.hostname;
+      const uri = `${protocol}${hostname}:${e.port}/`;
+
+      log.info(`Application is starting on ${uri}`);
+      log.debug(JSON.stringify(options_, null, 2));
+    },
+  );
 
   // define routes
   const router = new oak.Router();
@@ -80,6 +90,12 @@ const init = async (customOptions?: Options): Promise<Service> => {
 
     addMiddleware: (middleware: Middleware): void => {
       app.use(middleware);
+    },
+
+    addHealthCheck: (path: string): void => {
+      router.get(path, (ctx) => {
+        ctx.response.body = "";
+      });
     },
 
     start: () => start(serviceObject),

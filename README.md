@@ -4,7 +4,7 @@ Hex Service is a service boilerplate to enable developers to start coding their 
 
 However, the motivation behind the project may sound familiar, and there are tons of boilerplates already that serve this purpose, hex-service allows you to run your code for **both** `Deno` and `Node.js`.
 
-Since it provides an orthogonal solution for `Deno` and `Node.js` code sharing, it's a perfect boilerplate for developers who want to be able to stick with modern tooling by using them immediately. hex-service simply runs on Deno's powerful ecosystem, which providers many developer tools and libraries built-in. Additionally, it allows you to compile your code in order to run on good old `Node.js`.
+Since hex-service provides an orthogonal solution for `Deno` and `Node.js` code sharing, it's a perfect boilerplate for developers who want to be able to stick with modern tooling by using them immediately. hex-service simply runs on Deno's powerful ecosystem, which providers many developer tools and libraries built-in. Additionally, it allows you to compile your code in order to run on good old `Node.js`.
 
 
 ## Features

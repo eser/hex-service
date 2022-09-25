@@ -54,7 +54,7 @@ await build({
     // shims the crypto global.
     crypto: true,
     // shims DOMException
-    domException: false,
+    domException: true,
     // shims fetch, File, FormData, Headers, Request, and Response
     undici: true,
     // shams (checker) for the global.WeakRef, helps type-checking only
@@ -72,7 +72,7 @@ await build({
     // importHelpers: tsconfigJson?.compilerOptions?.importHelpers,
     importHelpers: true,
     // target: tsconfigJson?.compilerOptions?.target,
-    target: "ES2021",
+    target: "ES2017",
     // sourceMap: tscconfigJson?.compilerOptions?.sourceMap,
     // inlineSources: tscconfigJson?.compilerOptions?.inlineSources,
     // lib: denoJson?.compilerOptions?.lib as LibName[] | undefined,
@@ -85,3 +85,6 @@ await build({
 // post build steps
 Deno.copyFileSync("LICENSE", "dist/LICENSE");
 Deno.copyFileSync("README.md", "dist/README.md");
+Deno.copyFileSync("CODE_OF_CONDUCT.md", "dist/CODE_OF_CONDUCT.md");
+Deno.copyFileSync("CONTRIBUTING.md", "dist/CONTRIBUTING.md");
+Deno.copyFileSync("SECURITY.md", "dist/SECURITY.md");

@@ -1,14 +1,14 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Deno Launch",
-            "type": "node",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "runtimeExecutable": "deno",
-            "runtimeArgs": [ "./src/app.ts" ],
-            "outputCapture": "std",
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Deno Launch",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "deno",
+      "runtimeArgs": [ "./src/app.ts" ],
+      "outputCapture": "std",
+    }
+  ]
 }

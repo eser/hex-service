@@ -1,8 +1,10 @@
 {
+  "importMap": "./import_map.json",
   "compilerOptions": {
+    "allowJs": true,
     "lib": [
       "deno.ns",
-      "es2022",
+      "esnext",
       "dom",
       "dom.iterable",
       "dom.asynciterable"
@@ -10,7 +12,6 @@
     "jsx": "react",
     "strict": true
   },
-  "importMap": "./import_map.json",
   "lint": {
     "files": {
       "include": [
@@ -58,15 +59,16 @@
     }
   },
   "tasks": {
-    "test": "deno test --allow-net --allow-env --allow-read ./src/ --coverage=./etc/cov_profile",
-    "test:coverage": "deno coverage ./etc/cov_profile",
-    "test:generate-lcov": "deno coverage ./etc/cov_profile --lcov > ./etc/cov_profile/cov_profile.lcov",
+    "test": "deno test --allow-net --allow-env --allow-read ./src/ --coverage=./etc/coverage",
+    "test:coverage": "deno coverage ./etc/coverage",
+    "test:generate-lcov": "deno coverage ./etc/coverage --lcov > ./etc/coverage/cov_profile.lcov",
     "bench": "deno bench ./src/ --unstable",
-    "cli": "deno run ./src/test.ts",
-    "start": "deno run --allow-net --allow-env --allow-read ./src/app.ts",
-    "dev": "deno run --allow-net --allow-env --allow-read --inspect-brk ./src/app.ts",
-    "build": "deno run -A packager.ts",
     "cleanup": "rm -rf ./dist/ yarn.lock package-lock.json",
+    "build": "deno run -A packager.ts",
+    "start": "deno run --allow-net --allow-env --allow-read ./src/app.ts",
+    "cli": "deno run ./src/test.ts",
+    "dev": "deno run --allow-net --allow-env --allow-read --watch ./src/app.ts",
+    "dev:inspector": "deno run --allow-net --allow-env --allow-read --inspect-brk --watch ./src/app.ts",
     "dockerize": "docker build -t hex-service . && docker run -it --init -p 3000:3000 hex-service"
   }
 }
