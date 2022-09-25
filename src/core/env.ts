@@ -19,10 +19,10 @@ const loadEnv = async (): Promise<dotenv.DotenvConfig> => {
   const sysVars = Deno.env.toObject();
   const env = sysVars["ENV"] ?? "development";
 
-  const vars = await loadEnvFile(`.env`);
+  const vars = await loadEnvFile(".env");
   Object.assign(vars, await loadEnvFile(`.env.${env}`));
   if (env !== "test") {
-    Object.assign(vars, await loadEnvFile(`.env.local`));
+    Object.assign(vars, await loadEnvFile(".env.local"));
   }
   Object.assign(vars, await loadEnvFile(`.env.${env}.local`));
   Object.assign(vars, sysVars);
