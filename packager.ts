@@ -34,7 +34,7 @@ await build({
       },
       // error event
       {
-        module: "./src/shims/error-event.ts",
+        module: "https://deno.land/x/hex@0.5.2/src/shims/error-event/error-event.ts",
         globalNames: [
           {
             name: "ErrorEvent",

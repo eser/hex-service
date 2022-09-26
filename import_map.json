@@ -1,6 +1,6 @@
 {
   "imports": {
-    "@hex/": "https://deno.land/x/hex@0.5.1/src/",
+    "@hex/": "https://deno.land/x/hex@0.5.2/src/",
     "@app/": "./src/"
   }
 }
