@@ -34,7 +34,7 @@ await build({
       },
       // error event
       {
-        module: "./src/core/shims/error-event.ts",
+        module: "./src/shims/error-event.ts",
         globalNames: [
           {
             name: "ErrorEvent",

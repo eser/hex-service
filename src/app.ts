@@ -1,5 +1,5 @@
-import { type Context, run } from "@app/core/mod.ts";
-import { timerMiddleware } from "@app/middlewares/timer.ts";
+import { type Context, run } from "@hex/service/mod.ts";
+import { timerMiddleware } from "@hex/service/middlewares/timer.ts";
 import { homeAction } from "@app/actions/home.ts";
 import { echoAction } from "@app/actions/echo.ts";
 import { errorProneAction } from "@app/actions/error-prone.ts";

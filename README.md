@@ -10,14 +10,16 @@ Since hex-service provides an orthogonal solution for `Deno` and `Node.js` code 
 ## Features
 
 * Built on [Deno](https://deno.land) and Oak. So it supports Modern Web APIs.
+* Can be compiled to run on `Node.js` as well.
 * Transpiles [TypeScript](https://www.typescriptlang.org/) and [React JSX](https://reactjs.org/) out of the box.
 * Separated middleware and actions.
 * Simple TDD convention and testing environment.
 * Ready to debug on VS Code or Chromium Inspector.
 * Ready to containerize.
-* [TODO] Development mode
+* [WIP] Development mode.
+* [WIP] MongoDB connection support.
+* [WIP] JWT authentication middleware.
 * [TODO] Built-in [Swagger](https://swagger.io) support.
-* [TODO] MongoDB connection support.
 
 
 ## Quick start
@@ -61,6 +63,7 @@ deno task start
 With `Node.js`:
 
 ```bash
+deno task build   # build it first in order to run on Node.js
 node dist/script/app.js
 ```
 
@@ -71,7 +74,8 @@ See [GitHub Projects](https://github.com/eserozvataf/hex-service/projects) for m
 
 ## Requirements
 
-* Deno (https://deno.land/)
+* Deno (https://deno.land/) or,
+* Node.js (https://nodejs.dev/)
 
 
 ## License

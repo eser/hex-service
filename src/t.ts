@@ -1,5 +1,5 @@
-import { mongo } from "./core/deps.ts";
-import { MongoRepository } from "./core/data/mongo.ts";
+import { mongo } from "./deps.ts";
+import { MongoRepository } from "@hex/data/mongo.ts";
 
 interface User {
   _id: string;
