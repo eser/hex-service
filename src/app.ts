@@ -1,4 +1,4 @@
-import { type Context, run, type ServiceOptions } from "@hex/service/mod.ts";
+import { type Context, run } from "@hex/service/mod.ts";
 
 import { addHeaderMiddleware } from "@hex/service/middlewares/add-header.ts";
 import { corsMiddleware } from "@hex/service/middlewares/cors.ts";
@@ -10,11 +10,7 @@ import { errorProneAction } from "@app/actions/error-prone.ts";
 
 import * as Sentry from "npm:@sentry/node";
 
-// interface definitions
-interface AppOptions extends ServiceOptions {
-  mongoDbConnString?: string;
-  sentryDsn?: string;
-}
+import { type AppOptions } from "./types.ts";
 
 // public functions
 const app = run<AppOptions>(async (s) => {
@@ -26,7 +22,7 @@ const app = run<AppOptions>(async (s) => {
 
   // configure di registry
   await s.configureDI((registry) => {
-    // registry.setValue(
+    registry.setValue("test", "placeholder value");
   });
 
   // add middlewares
@@ -46,7 +42,7 @@ const app = run<AppOptions>(async (s) => {
   s.addRoute("get", "/:slug", (ctx: Context) => {
     ctx.assert(ctx?.params?.slug?.length > 2, 400, "Slug is required");
 
-    return echoAction(ctx?.params?.slug);
+    return echoAction(s.registry, ctx?.params?.slug);
   });
 
   // sentry initialization
