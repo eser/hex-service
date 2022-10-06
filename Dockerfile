@@ -1,6 +1,6 @@
 FROM hayd/alpine-deno:1.0.0
 
-EXPOSE 3000
+EXPOSE 8080
 
 WORKDIR /app
 

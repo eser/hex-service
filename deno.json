@@ -69,6 +69,6 @@
     "cli": "deno run ./src/test.ts",
     "dev": "deno run --allow-net --allow-env --allow-read --unstable --watch ./src/app.ts",
     "dev:inspector": "deno run --allow-net --allow-env --allow-read --unstable --inspect-brk --watch ./src/app.ts",
-    "dockerize": "docker build -t hex-service . && docker run -it --init -p 3000:3000 hex-service"
+    "dockerize": "docker build -t hex-service . && docker run -it --init -p 8080:8080 hex-service"
   }
 }

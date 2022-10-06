@@ -1,15 +1,22 @@
 import { type Context, run, type ServiceOptions } from "@hex/service/mod.ts";
+
+import { addHeaderMiddleware } from "@hex/service/middlewares/add-header.ts";
+import { corsMiddleware } from "@hex/service/middlewares/cors.ts";
 import { jwtMiddleware } from "@hex/service/middlewares/jwt.ts";
+
 import { homeAction } from "@app/actions/home.ts";
 import { echoAction } from "@app/actions/echo.ts";
 import { errorProneAction } from "@app/actions/error-prone.ts";
+
 import * as Sentry from "npm:@sentry/node";
 
+// interface definitions
 interface AppOptions extends ServiceOptions {
   mongoDbConnString?: string;
   sentryDsn?: string;
 }
 
+// public functions
 const app = run<AppOptions>(async (s) => {
   // configure options
   await s.configureOptions((env, options) => {
@@ -23,6 +30,10 @@ const app = run<AppOptions>(async (s) => {
   });
 
   // add middlewares
+  s.addMiddleware(
+    addHeaderMiddleware({ "if-none-match": "no-match-for-this" }),
+  );
+  s.addMiddleware(corsMiddleware());
   s.addMiddleware(jwtMiddleware());
 
   // add routes
@@ -47,6 +58,7 @@ const app = run<AppOptions>(async (s) => {
       // of transactions for performance monitoring.
       // We recommend adjusting this value in production
       tracesSampleRate: 1.0,
+      environment: s.options.envName,
     });
   }
 });
