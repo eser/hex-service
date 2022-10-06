@@ -1,10 +1,12 @@
 import { type Context, run } from "@hex/service/mod.ts";
+import { MongoDbConnection } from "@hex/data/adapters/mongodb.ts";
 
 import { addHeaderMiddleware } from "@hex/service/middlewares/add-header.ts";
 import { corsMiddleware } from "@hex/service/middlewares/cors.ts";
 import { jwtMiddleware } from "@hex/service/middlewares/jwt.ts";
 
 import { homeAction } from "@app/actions/home.ts";
+import { mongoAction } from "@app/actions/mongo.ts";
 import { echoAction } from "@app/actions/echo.ts";
 import { errorProneAction } from "@app/actions/error-prone.ts";
 
@@ -23,6 +25,13 @@ const app = run<AppOptions>(async (s) => {
   // configure di registry
   await s.configureDI((registry) => {
     registry.setValue("test", "placeholder value");
+
+    registry.setValueLazy("db", async () => {
+      const client = new MongoDbConnection(s.options.mongoDbConnString!);
+      await client.connect();
+
+      return client;
+    });
   });
 
   // add middlewares
@@ -36,6 +45,7 @@ const app = run<AppOptions>(async (s) => {
   s.addHealthCheck("/health-check");
 
   s.addRoute("get", "/", homeAction);
+  s.addRoute("get", "/mongo", () => mongoAction(s.registry));
 
   s.addRoute("get", "/error", errorProneAction);
 
