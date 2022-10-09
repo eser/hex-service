@@ -30,6 +30,3 @@ tsconfig.tsbuildinfo
 # coverage files
 etc/coverage/*.json
 etc/coverage/cov_profile.lcov
-
-# misc files
-src/temp.ts

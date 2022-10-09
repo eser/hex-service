@@ -45,8 +45,7 @@ const app = run<AppOptions>(async (s) => {
   s.addHealthCheck("/health-check");
 
   s.addRoute("get", "/", homeAction);
-  s.addRoute("get", "/mongo", () => mongoAction(s.registry));
-
+  s.addRoute("get", "/mongo", mongoAction);
   s.addRoute("get", "/error", errorProneAction);
 
   s.addRoute("get", "/:slug", (ctx: Context) => {

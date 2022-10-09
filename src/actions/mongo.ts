@@ -1,4 +1,4 @@
-import { type Registry } from "../types.ts";
+import { type Context, type Registry } from "../types.ts";
 import { MongoDbConnection } from "@hex/data/adapters/mongodb.ts";
 
 interface Comment {
@@ -8,9 +8,9 @@ interface Comment {
   workspace_id: string;
 }
 
-const mongoAction = async (r: Registry) => {
-  const db = await r.get<MongoDbConnection>("db");
-
+const mongoAction = async (ctx: Context) => {
+  const registry = ctx.app.state.registry as Registry;
+  const db = await registry.get<MongoDbConnection>("db");
   const commentRepository = db!.repository<Comment>("comments");
 
   const comments = await commentRepository.getAll();
